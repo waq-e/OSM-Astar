@@ -8,7 +8,7 @@
 #include "render.h"
 #include "route_planner.h"
 
-float getFloatFromRangePrompted(float lowerBound, float upperBound, std::string prompt);
+float getFloatFromRangePrompted(float lowerBound, float upperBound, const std::string& prompt);
 
 using namespace std::experimental;
 
@@ -29,7 +29,8 @@ static std::optional<std::vector<std::byte>> ReadFile(const std::string &path) {
 }
 
 int main(int argc, const char **argv) {
-	std::string osm_data_file = "";
+	std::string osm_data_file;
+	osm_data_file = "";
 	if (argc > 1) {
 		for (int i = 1; i < argc; ++i)
 			if (std::string_view{argv[i]} == "-f" && ++i < argc)
@@ -50,8 +51,6 @@ int main(int argc, const char **argv) {
 		else
 			osm_data = std::move(*data);
 	}
-	//Complete this TODO to satisfy Project Rubric Criterias of User Input
-
 	// TODO 1: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
 	// A user running the project should be able to input values between 0 and 100 for
 	// the start x, start y, end x, and end y coordinates of the search, and the project
@@ -89,7 +88,7 @@ int main(int argc, const char **argv) {
 	display.begin_show();
 }
 
-float getFloatFromRangePrompted(float lowerBound, float upperBound, std::string prompt) {
+float getFloatFromRangePrompted(float lowerBound, float upperBound, const std::string& prompt) {
 	float result{upperBound + 1};
 	while (result < lowerBound || result > upperBound) {
 		std::cout << "Enter the " << prompt << " (between " << lowerBound << " and "
