@@ -1,0 +1,6 @@
+/.idea/.gitignore
+/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdC/a.out
+/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdCXX/a.out
+/.idea/CppND-Route-Planning-Project.iml
+/.idea/*
+/cmake-build-debug/*
