@@ -16,8 +16,9 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 
 // TODO 3: Implement the CalculateHValue method.
 float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
-	float distanceToEnd = node->distance(*end_node);
-	return distanceToEnd;
+	//float distanceToEnd = node->distance(*end_node);
+	//return distanceToEnd;
+	return node->distance(*end_node);
 }
 
 
