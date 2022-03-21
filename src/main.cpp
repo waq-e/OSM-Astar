@@ -8,6 +8,8 @@
 #include "render.h"
 #include "route_planner.h"
 
+float getFloatFromRangePrompted(float lowerBound, float upperBound, std::string prompt);
+
 using namespace std::experimental;
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path) {
@@ -54,26 +56,11 @@ int main(int argc, const char **argv) {
 	// A user running the project should be able to input values between 0 and 100 for
 	// the start x, start y, end x, and end y coordinates of the search, and the project
 	// should find a path between the points.
-	float start_x{101};
-	while (start_x < 0 || start_x > 100) {
-		std::cout << "Enter starting x value (between 0 and 100): ";
-		std::cin >> start_x;
-	}
-	float start_y{101};
-	while (start_y < 0 || start_y > 100) {
-		std::cout << "Enter starting y value (between 0 and 100): ";
-		std::cin >> start_y;
-	}
-	float end_x{101};
-	while (end_x < 0 || end_x > 100) {
-		std::cout << "Enter ending x value (between 0 and 100): ";
-		std::cin >> end_x;
-	}
-	float end_y{101};
-	while (end_y < 0 || end_y > 100) {
-		std::cout << "Enter ending y value (between 0 and 100): ";
-		std::cin >> end_y;
-	}
+	float start_x{getFloatFromRangePrompted(0.0f, 100.0f, "starting x value")};
+	float start_y{getFloatFromRangePrompted(0.0f, 100.0f, "starting y value")};
+	std::cout << '\n';
+	float end_x{getFloatFromRangePrompted(0.0f, 100.0f, "ending x value")};
+	float end_y{getFloatFromRangePrompted(0.0f, 100.0f, "ending y value")};
 	std::cout << '\n';
 
 	// The coordinate (0, 0) should roughly correspond with the lower left corner of
@@ -100,4 +87,14 @@ int main(int argc, const char **argv) {
 		render.Display(surface);
 	});
 	display.begin_show();
+}
+
+float getFloatFromRangePrompted(float lowerBound, float upperBound, std::string prompt) {
+	float result{upperBound + 1};
+	while (result < lowerBound || result > upperBound) {
+		std::cout << "Enter the " << prompt << " (between " << lowerBound << " and "
+				<< upperBound << "): ";
+		std::cin >> result;
+	}
+	return result;
 }
